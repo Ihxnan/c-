@@ -4,100 +4,100 @@
 
 #include "ItemDatabase.h"
 
-// Ôö¼ÓÎïÆ·
+// å¢žåŠ ç‰©å“
 void UI_AddItem(void)
 {
     struct Item temp_item;
     PItemIterator it = ItemDB_CreateItemIterator();
 
-    // ¶ÁÈëÐÂÎïÆ·±àºÅ
-    printf("ÇëÊäÈëÐÂÎïÆ·±àºÅ£º");
+    // è¯»å…¥æ–°ç‰©å“ç¼–å·
+    printf("è¯·è¾“å…¥æ–°ç‰©å“ç¼–å·ï¼š");
     scanf("%d", &temp_item.number);
 
-    // ¼ì²éÎïÆ·±àºÅÊÇ·ñÒÑ¾­´æÔÚ
-    // ´æÔÚÔò·µ»Ø´íÎóÐÅÏ¢²¢·µ»Ø
+    // æ£€æŸ¥ç‰©å“ç¼–å·æ˜¯å¦å·²ç»å­˜åœ¨
+    // å­˜åœ¨åˆ™è¿”å›žé”™è¯¯ä¿¡æ¯å¹¶è¿”å›ž
     ItemDB_FindItem(temp_item.number, it);
     if (ItemDB_IsItemIteratorValid(it))
-        printf("ÎïÆ·ÒÑ¾­´æÔÚ\n");
+        printf("ç‰©å“å·²ç»å­˜åœ¨\n");
     else
     {
-        // ¶ÁÈëÐÂÎïÆ·Ãû³Æ
-        printf("ÇëÊäÈëÐÂÎïÆ·Ãû³Æ£º");
+        // è¯»å…¥æ–°ç‰©å“åç§°
+        printf("è¯·è¾“å…¥æ–°ç‰©å“åç§°ï¼š");
         scanf("%s", temp_item.name);
 
-        // ¶ÁÈëÐÂÎïÆ·ÊýÁ¿
-        printf("ÇëÊäÈëÐÂÎïÆ·ÊýÁ¿£º");
+        // è¯»å…¥æ–°ç‰©å“æ•°é‡
+        printf("è¯·è¾“å…¥æ–°ç‰©å“æ•°é‡ï¼š");
         scanf("%d", &temp_item.quantity);
 
-        // ½«ÐÂÎïÆ·¼ÓÈëÊý¾Ý¿âÖÐ
+        // å°†æ–°ç‰©å“åŠ å…¥æ•°æ®åº“ä¸­
         if (!ItemDB_AddItem(&temp_item))
-            printf("ÎïÆ·Ìí¼ÓÊ§°Ü!\n");
+            printf("ç‰©å“æ·»åŠ å¤±è´¥!\n");
         else
-            printf("Ìí¼Ó³É¹¦!\n");
+            printf("æ·»åŠ æˆåŠŸ!\n");
     }
 
     ItemDB_DeleteItemIterator(it);
 }
 
-// É¾³ýÎïÆ·
+// åˆ é™¤ç‰©å“
 void UI_DeleteItem(void)
 {
-    // ÒªÉ¾³ýµÄÎïÆ·µÄ±àºÅ
+    // è¦åˆ é™¤çš„ç‰©å“çš„ç¼–å·
     int delete_number = 0;
     PItemIterator it = ItemDB_CreateItemIterator();
 
-    // ¶ÁÈëÒªÉ¾³ýÎïÆ·±àºÅ
-    printf("ÇëÊäÈëÒªÉ¾³ýÎïÆ·±àºÅ£º");
+    // è¯»å…¥è¦åˆ é™¤ç‰©å“ç¼–å·
+    printf("è¯·è¾“å…¥è¦åˆ é™¤ç‰©å“ç¼–å·ï¼š");
     scanf("%d", &delete_number);
 
-    // »ñµÃÎïÆ·ÏÂ±ê
+    // èŽ·å¾—ç‰©å“ä¸‹æ ‡
     ItemDB_FindItem(delete_number, it);
     if (!ItemDB_IsItemIteratorValid(it))
     {
-        printf("É¾³ýÎïÆ·²»´æÔÚ\n");
+        printf("åˆ é™¤ç‰©å“ä¸å­˜åœ¨\n");
     }
     else
     {
         ItemDB_DeleteItem(it);
-        printf("É¾³ý³É¹¦\n");
+        printf("åˆ é™¤æˆåŠŸ\n");
     }
     ItemDB_DeleteItemIterator(it);
 }
 
-// ¸üÐÂÎïÆ·
+// æ›´æ–°ç‰©å“
 void UI_UpdateItem(void)
 {
     int number;
     struct Item *p_item;
     PItemIterator it = ItemDB_CreateItemIterator();
 
-    printf("ÇëÊäÈëÒª¸üÐÂÎïÆ·µÄ±àºÅ£º");
+    printf("è¯·è¾“å…¥è¦æ›´æ–°ç‰©å“çš„ç¼–å·ï¼š");
     scanf("%d", &number);
 
     ItemDB_FindItem(number, it);
 
     if (!ItemDB_IsItemIteratorValid(it))
     {
-        printf("ÎïÆ·²»´æÔÚ!\n");
+        printf("ç‰©å“ä¸å­˜åœ¨!\n");
     }
     else
     {
         p_item = ItemDB_GetItemPointer(it);
 
-        // ¶ÁÈëÐÂÎïÆ·Ãû³Æ
-        printf("ÇëÊäÈëÐÂÎïÆ·Ãû³Æ£º");
+        // è¯»å…¥æ–°ç‰©å“åç§°
+        printf("è¯·è¾“å…¥æ–°ç‰©å“åç§°ï¼š");
         scanf("%s", p_item->name);
 
-        // ¶ÁÈëÐÂÎïÆ·ÊýÁ¿
-        printf("ÇëÊäÈëÐÂÎïÆ·ÊýÁ¿£º");
+        // è¯»å…¥æ–°ç‰©å“æ•°é‡
+        printf("è¯·è¾“å…¥æ–°ç‰©å“æ•°é‡ï¼š");
         scanf("%d", &p_item->quantity);
 
-        printf("ÎïÆ·¸üÐÂ³É¹¦£¡\n");
+        printf("ç‰©å“æ›´æ–°æˆåŠŸï¼\n");
     }
     ItemDB_DeleteItemIterator(it);
 }
 
-// ËÑË÷ÎïÆ·
+// æœç´¢ç‰©å“
 void UI_SearchItem(void)
 {
     int number;
@@ -105,46 +105,46 @@ void UI_SearchItem(void)
     struct Item *p_item;
 
     p_iter = ItemDB_CreateItemIterator();
-    // ÊäÈëÎïÆ·±àºÅ
-    printf("ÇëÊäÈëÎïÆ·±àºÅ£º");
+    // è¾“å…¥ç‰©å“ç¼–å·
+    printf("è¯·è¾“å…¥ç‰©å“ç¼–å·ï¼š");
     scanf("%d", &number);
 
-    // ËÑË÷¶ÔÓ¦±àºÅµÄÎïÆ·
+    // æœç´¢å¯¹åº”ç¼–å·çš„ç‰©å“
     ItemDB_FindItem(number, p_iter);
 
-    // Èç¹ûÎïÆ·²»´æÔÚÔòÏÔÊ¾²»´æÔÚ²¢·µ»Ø
+    // å¦‚æžœç‰©å“ä¸å­˜åœ¨åˆ™æ˜¾ç¤ºä¸å­˜åœ¨å¹¶è¿”å›ž
     if (!ItemDB_IsItemIteratorValid(p_iter))
     {
-        printf("ÎïÆ·²»´æÔÚ!\n");
+        printf("ç‰©å“ä¸å­˜åœ¨!\n");
     }
     else
     {
-        // »ñÈ¡Ö¸ÏòÎïÆ·µÄÖ¸Õë
+        // èŽ·å–æŒ‡å‘ç‰©å“çš„æŒ‡é’ˆ
         p_item = ItemDB_GetItemPointer(p_iter);
 
-        printf("ÎïÆ·µÄÃû³Æ£º%s\nÎïÆ·µÄÊýÁ¿£º%d\n", p_item->name, p_item->quantity);
+        printf("ç‰©å“çš„åç§°ï¼š%s\nç‰©å“çš„æ•°é‡ï¼š%d\n", p_item->name, p_item->quantity);
     }
     ItemDB_DeleteItemIterator(p_iter);
 }
 
-// Êä³öÊý¾Ý¿â
+// è¾“å‡ºæ•°æ®åº“
 void UI_PrintDatabase(void)
 {
     int n;
     struct Item *p;
     PItemIterator p_iter;
 
-    // »ñÈ¡²¢ÏÔÊ¾ÎïÆ·ÊýÁ¿
+    // èŽ·å–å¹¶æ˜¾ç¤ºç‰©å“æ•°é‡
     n = ItemDB_GetNumItems();
-    printf("ÎïÆ·µÄÊýÁ¿£º%d\n", n);
+    printf("ç‰©å“çš„æ•°é‡ï¼š%d\n", n);
 
-    // Èç¹ûÎïÆ·ÊýÁ¿Îª0Ôò·µ»Ø
+    // å¦‚æžœç‰©å“æ•°é‡ä¸º0åˆ™è¿”å›ž
     if (n == 0)
         return;
 
     p_iter = ItemDB_CreateItemIterator();
-    // ±éÀúËùÓÐÎïÆ·²¢ÏÔÊ¾ÎïÆ·ÐÅÏ¢
-    printf("   ±àºÅ            Ãû³Æ            ÊýÁ¿\n");
+    // éåŽ†æ‰€æœ‰ç‰©å“å¹¶æ˜¾ç¤ºç‰©å“ä¿¡æ¯
+    printf("   ç¼–å·            åç§°            æ•°é‡\n");
     for (ItemDB_GetFirstItemIterator(p_iter);
          ItemDB_IsItemIteratorValid(p_iter);
          ItemDB_GetNextItemIterator(p_iter))
@@ -155,67 +155,67 @@ void UI_PrintDatabase(void)
     ItemDB_DeleteItemIterator(p_iter);
 }
 
-// Çå¿ÕÊý¾Ý¿â
+// æ¸…ç©ºæ•°æ®åº“
 void UI_ClearDatabase(void)
 {
     ItemDB_ClearDatabase();
-    printf("É¾³ý³É¹¦\n");
+    printf("åˆ é™¤æˆåŠŸ\n");
 }
 
-// °ÑÊý¾Ý¿âÊý¾Ý±£´æµ½ÎÄ¼þÖÐ
+// æŠŠæ•°æ®åº“æ•°æ®ä¿å­˜åˆ°æ–‡ä»¶ä¸­
 void UI_SaveDatabaseToFile(void)
 {
     char file_name[1024];
-    // ÊäÈëÎÄ¼þÃû
-    printf("ÇëÊäÈëÒª±£´æµÄÎÄ¼þÃû£º");
+    // è¾“å…¥æ–‡ä»¶å
+    printf("è¯·è¾“å…¥è¦ä¿å­˜çš„æ–‡ä»¶åï¼š");
     scanf("%s", file_name);
 
-    // °ÑÊý¾Ý¿â±£´æµ½¸ÃÎÄ¼þÖÐ
+    // æŠŠæ•°æ®åº“ä¿å­˜åˆ°è¯¥æ–‡ä»¶ä¸­
     if (ItemDB_SaveToFile(file_name))
-        printf("±£´æ³É¹¦¡£\n");
+        printf("ä¿å­˜æˆåŠŸã€‚\n");
     else
-        printf("±£´æÊ§°Ü£¡\n");
+        printf("ä¿å­˜å¤±è´¥ï¼\n");
 }
 
-// ´ÓÎÄ¼þÖÐÔØÈëÊý¾Ý¿âÊý¾Ý
+// ä»Žæ–‡ä»¶ä¸­è½½å…¥æ•°æ®åº“æ•°æ®
 void UI_LoadDatabaseFromFile(void)
 {
     char file_name[1024];
-    // ÊäÈëÎÄ¼þÃû
-    printf("ÇëÊäÈëÒªÔØÈëµÄÎÄ¼þÃû£º");
+    // è¾“å…¥æ–‡ä»¶å
+    printf("è¯·è¾“å…¥è¦è½½å…¥çš„æ–‡ä»¶åï¼š");
     scanf("%s", file_name);
 
-    // °ÑÊý¾Ý¿â±£´æµ½¸ÃÎÄ¼þÖÐ
+    // æŠŠæ•°æ®åº“ä¿å­˜åˆ°è¯¥æ–‡ä»¶ä¸­
     if (ItemDB_LoadFromFile(file_name))
-        printf("ÔØÈë³É¹¦¡£\n");
+        printf("è½½å…¥æˆåŠŸã€‚\n");
     else
-        printf("ÔØÈëÊ§°Ü£¡\n");
+        printf("è½½å…¥å¤±è´¥ï¼\n");
 }
 
 void UI_SortDatabase(void)
 {
     int sort_method, sort_dir;
-    printf("ÇëÑ¡ÔñÅÅÐò·½Ê½£º\n");
-    printf("\t\t0->°´±àºÅÅÅÐò\n");
-    printf("\t\t1->°´Ãû³ÆÅÅÐò\n");
-    printf("\t\t2->°´ÊýÁ¿ÅÅÐò\n");
+    printf("è¯·é€‰æ‹©æŽ’åºæ–¹å¼ï¼š\n");
+    printf("\t\t0->æŒ‰ç¼–å·æŽ’åº\n");
+    printf("\t\t1->æŒ‰åç§°æŽ’åº\n");
+    printf("\t\t2->æŒ‰æ•°é‡æŽ’åº\n");
     scanf("%d", &sort_method);
     if (sort_method > 2 || sort_method < 0)
     {
-        printf("ÊäÈë·Ç·¨£¡£¡£¡\n");
+        printf("è¾“å…¥éžæ³•ï¼ï¼ï¼\n");
         return;
     }
-    printf("ÇëÊäÈëÅÅÐò·½Ïò£º\n");
-    printf("\t\t0->°´ÉýÐòÅÅÐò\n");
-    printf("\t\t1->°´½µÐòÅÅÐò\n");
+    printf("è¯·è¾“å…¥æŽ’åºæ–¹å‘ï¼š\n");
+    printf("\t\t0->æŒ‰å‡åºæŽ’åº\n");
+    printf("\t\t1->æŒ‰é™åºæŽ’åº\n");
     scanf("%d", &sort_dir);
     if (sort_dir > 1 || sort_dir < 0)
     {
-        printf("ÊäÈë·Ç·¨£¡£¡£¡\n");
+        printf("è¾“å…¥éžæ³•ï¼ï¼ï¼\n");
         return;
     }
     ItemDB_Sort(sort_method, sort_dir);
-    printf("ÅÅÐò³É¹¦\n");
+    printf("æŽ’åºæˆåŠŸ\n");
 }
 
  #if _DEBUG
@@ -238,38 +238,38 @@ void CreatTestDatabase(void)
 
 #endif // _DEBUG
 
-// ²Ëµ¥Ïî½á¹¹
+// èœå•é¡¹ç»“æž„
 struct {
-    int number; // ±àºÅ
-    const char* name; // Ãû³Æ
-    void (*f) (void); // Ö¸Ïò´¦Àíº¯ÊýµÄÖ¸Õë
-} main_menu[] // Ö÷²Ëµ¥
+    int number; // ç¼–å·
+    const char* name; // åç§°
+    void (*f) (void); // æŒ‡å‘å¤„ç†å‡½æ•°çš„æŒ‡é’ˆ
+} main_menu[] // ä¸»èœå•
 ={
-    {0, "ÍË³ö", NULL},
-    {1, "Ôö¼ÓÏîÄ¿",     UI_AddItem},
-    {2, "É¾³ýÏîÄ¿",     UI_DeleteItem},
-    {3, "ËÑË÷ÏîÄ¿",     UI_SearchItem},
-    {4, "¸üÐÂÏîÄ¿",     UI_UpdateItem},
-    {5, "Êä³öËùÓÐÏîÄ¿", UI_PrintDatabase},
-    {6, "Çå¿ÕËùÓÐÏîÄ¿", UI_ClearDatabase},
-    {7, "±£´æµ½ÎÄ¼þ",   UI_SaveDatabaseToFile},
-    {8, "´ÓÎÄ¼þÔØÈë",   UI_LoadDatabaseFromFile},
-    {9, "ÅÅÐòÏîÄ¿",     UI_SortDatabase}
+    {0, "é€€å‡º", NULL},
+    {1, "å¢žåŠ é¡¹ç›®",     UI_AddItem},
+    {2, "åˆ é™¤é¡¹ç›®",     UI_DeleteItem},
+    {3, "æœç´¢é¡¹ç›®",     UI_SearchItem},
+    {4, "æ›´æ–°é¡¹ç›®",     UI_UpdateItem},
+    {5, "è¾“å‡ºæ‰€æœ‰é¡¹ç›®", UI_PrintDatabase},
+    {6, "æ¸…ç©ºæ‰€æœ‰é¡¹ç›®", UI_ClearDatabase},
+    {7, "ä¿å­˜åˆ°æ–‡ä»¶",   UI_SaveDatabaseToFile},
+    {8, "ä»Žæ–‡ä»¶è½½å…¥",   UI_LoadDatabaseFromFile},
+    {9, "æŽ’åºé¡¹ç›®",     UI_SortDatabase}
 };
 
 const int num_main_menu_items = (int)(sizeof(main_menu) / sizeof(main_menu[0]));
 
-// ÏÔÊ¾²Ëµ¥
+// æ˜¾ç¤ºèœå•
 void UI_DisplayMenu(void)
 {
     for (int i= 0; i < num_main_menu_items; ++i)
         printf("%d-%s\n", main_menu[i].number, main_menu[i].name);
 }
 
-// ´¦Àí²Ëµ¥Ïî
+// å¤„ç†èœå•é¡¹
 int UI_ProcessMenuItem(int menu_item)
-// menu_item: (in) ²Ëµ¥Ïî±àºÅ
-// ·µ»ØÖµ£º1-²Ëµ¥ÏîÎªÍË³ö£¬ 0-ÆäËû
+// menu_item: (in) èœå•é¡¹ç¼–å·
+// è¿”å›žå€¼ï¼š1-èœå•é¡¹ä¸ºé€€å‡ºï¼Œ 0-å…¶ä»–
 {
     int i;
     for (i = 0; i < num_main_menu_items; ++i)
@@ -289,7 +289,7 @@ int UI_ProcessMenuItem(int menu_item)
     }
     else
     {
-        printf("²Ëµ¥Ïî·Ç·¨£¡£¡£¡\n");
+        printf("èœå•é¡¹éžæ³•ï¼ï¼ï¼\n");
         return 0;
     }
 }
@@ -311,7 +311,7 @@ int main()
     {
         UI_DisplayMenu();
 
-        printf("ÇëÑ¡Ôñ²Ëµ¥Ïî£º");
+        printf("è¯·é€‰æ‹©èœå•é¡¹ï¼š");
         scanf("%d", &choice);
 
         if (UI_ProcessMenuItem(choice))
