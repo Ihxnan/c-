@@ -5,55 +5,55 @@
 #include "ItemDatabase_Internal.h"
 
 struct Item_Node *item_database_head = NULL;
-// Êı¾İ¿âÍ·Ö¸Õë£¬ Ö¸ÏòÁ´±íµÚÒ»¸ö½áµã
+// æ•°æ®åº“å¤´æŒ‡é’ˆï¼Œ æŒ‡å‘é“¾è¡¨ç¬¬ä¸€ä¸ªç»“ç‚¹
 
 struct Item_Node *item_database_tail = NULL;
-// Êı¾İ¿âÎ²Ö¸Õë£¬ Ö¸ÏòÁ´±í×îºóÒ»¸ö½áµã
+// æ•°æ®åº“å°¾æŒ‡é’ˆï¼Œ æŒ‡å‘é“¾è¡¨æœ€åä¸€ä¸ªç»“ç‚¹
 
-// Êµ¼ÊÎïÆ·ÊıÁ¿
+// å®é™…ç‰©å“æ•°é‡
 int num_items = 0;
 
-// µü´úÆ÷ÀàĞÍµÄÍêÕû¶¨Òå
+// è¿­ä»£å™¨ç±»å‹çš„å®Œæ•´å®šä¹‰
 struct ItemIterator
 {
-    struct Item_Node *p; // Ö¸ÏòÎïÆ·½áµãµÄÖ¸Õë
+    struct Item_Node *p; // æŒ‡å‘ç‰©å“ç»“ç‚¹çš„æŒ‡é’ˆ
 };
 
 PItemIterator ItemDB_CreateItemIterator(void)
-// ´´½¨Ò»¸öĞÂµÄµü´úÆ÷²¢·µ»ØÖ¸ÏòËüµÄÖ¸Õë
+// åˆ›å»ºä¸€ä¸ªæ–°çš„è¿­ä»£å™¨å¹¶è¿”å›æŒ‡å‘å®ƒçš„æŒ‡é’ˆ
 {
     return (PItemIterator)
         malloc(sizeof(struct ItemIterator));
 }
 
 void ItemDB_DeleteItemIterator(const PItemIterator p_iter)
-// É¾³ıp_iterÖ¸ÏòµÄµü´úÆ÷µÄ´æ´¢¿Õ¼ä
+// åˆ é™¤p_iteræŒ‡å‘çš„è¿­ä»£å™¨çš„å­˜å‚¨ç©ºé—´
 {
     free(p_iter);
 }
 
 void ItemDB_GetFirstItemIterator(PItemIterator p_iter)
-// »ñÈ¡Ö¸ÏòÏÂÒ»¸öÎïÆ·µÄµü´úÆ÷, ±£´æµ½p_iterÖ¸ÏòµÄ´æ´¢¿Õ¼äÖĞ
+// è·å–æŒ‡å‘ä¸‹ä¸€ä¸ªç‰©å“çš„è¿­ä»£å™¨, ä¿å­˜åˆ°p_iteræŒ‡å‘çš„å­˜å‚¨ç©ºé—´ä¸­
 {
     p_iter->p = item_database_head;
 }
 
 void ItemDB_GetNextItemIterator(PItemIterator p_iter)
-// ½«p_iterÖ¸ÏòµÄµü´úÆ÷¸ÄÎªÖ¸ÏòÏÂÒ»¸öÎïÆ·µÄµü´úÆ÷
+// å°†p_iteræŒ‡å‘çš„è¿­ä»£å™¨æ”¹ä¸ºæŒ‡å‘ä¸‹ä¸€ä¸ªç‰©å“çš„è¿­ä»£å™¨
 {
     p_iter->p = p_iter->p->next;
 }
 
 int ItemDB_IsItemIteratorValid(const PItemIterator p_iter)
-// Èç¹ûp_iterÖ¸ÏòµÄµü´úÆ÷ÓĞĞ§Ôò·µ»Ø1,·ñÔò·µ»Ø0
+// å¦‚æœp_iteræŒ‡å‘çš„è¿­ä»£å™¨æœ‰æ•ˆåˆ™è¿”å›1,å¦åˆ™è¿”å›0
 {
     return p_iter->p != NULL;
 }
 
 void ItemDB_FindItem(int number, PItemIterator p_iter)
-// ËÑË÷±àºÅÎªnumberµÄÎïÆ·£¬
-// ½«Ö¸Ïò¸Ã¸ÃÎïÆ·µÄµü´úÆ÷´æ·Åµ½p_iterÖ¸ÏòµÄ¿Õ¼äÖĞ¡£
-// Èç¹û¸ÃÎïÆ·²»´æÔÚÔò´æ´¢Ò»¸öÎŞĞ§µü´úÆ÷
+// æœç´¢ç¼–å·ä¸ºnumberçš„ç‰©å“ï¼Œ
+// å°†æŒ‡å‘è¯¥è¯¥ç‰©å“çš„è¿­ä»£å™¨å­˜æ”¾åˆ°p_iteræŒ‡å‘çš„ç©ºé—´ä¸­ã€‚
+// å¦‚æœè¯¥ç‰©å“ä¸å­˜åœ¨åˆ™å­˜å‚¨ä¸€ä¸ªæ— æ•ˆè¿­ä»£å™¨
 {
     struct Item_Node *p;
     for (p = item_database_head; p != NULL; p = p->next)
@@ -65,7 +65,7 @@ void ItemDB_FindItem(int number, PItemIterator p_iter)
 }
 
 int ItemDB_AddItem(const struct Item *p_item)
-// °Ñp_itemÖ¸ÏòµÄÎïÆ·¼ÓÈëÊı¾İ¿âÖĞ£¬ ³É¹¦·µ»Ø1£¬ ·ñÔò·µ»Ø0
+// æŠŠp_itemæŒ‡å‘çš„ç‰©å“åŠ å…¥æ•°æ®åº“ä¸­ï¼Œ æˆåŠŸè¿”å›1ï¼Œ å¦åˆ™è¿”å›0
 {
     struct Item_Node *new_item = (struct Item_Node *)malloc(sizeof(struct Item_Node));
 
@@ -84,7 +84,7 @@ int ItemDB_AddItem(const struct Item *p_item)
 }
 
 void ItemDB_DeleteItem(const PItemIterator p_iter)
-// É¾³ıp_iterÖ¸ÏòµÄµü´úÆ÷¶ÔÓ¦µÄÎïÆ·
+// åˆ é™¤p_iteræŒ‡å‘çš„è¿­ä»£å™¨å¯¹åº”çš„ç‰©å“
 {
     p_iter->p == item_database_head ? item_database_head = p_iter->p->next : 
         p_iter->p->prev->next = p_iter->p->next;
@@ -98,8 +98,8 @@ void ItemDB_DeleteItem(const PItemIterator p_iter)
 }
 
 struct Item *ItemDB_GetItemPointer(const PItemIterator p_iter)
-// ·µ»Øp_iterÖ¸ÏòµÄµü´úÆ÷¶ÔÓ¦µÄÎïÆ·µÄÖ¸Õë
-// Èç¹ûÎïÆ·²»´æÔÚÔò·µ»ØNULL
+// è¿”å›p_iteræŒ‡å‘çš„è¿­ä»£å™¨å¯¹åº”çš„ç‰©å“çš„æŒ‡é’ˆ
+// å¦‚æœç‰©å“ä¸å­˜åœ¨åˆ™è¿”å›NULL
 {
     if (!ItemDB_IsItemIteratorValid(p_iter))
         return NULL;
