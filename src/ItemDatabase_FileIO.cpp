@@ -5,55 +5,55 @@
 #include "ItemDatabase_Internal.h"
 
 int ItemDB_SaveToFile(const char *file_name)
-// °ÑÊı¾İ¿âÊı¾İ±£´æµ½ÎÄ¼şÃûÎªfile_nameÖ¸ÏòµÄ×Ö·û´®µÄÎÄ¼şÖĞ
-// ³É¹¦·µ»Ø1£¬ ·ñÔò·µ»Ø0
+// æŠŠæ•°æ®åº“æ•°æ®ä¿å­˜åˆ°æ–‡ä»¶åä¸ºfile_nameæŒ‡å‘çš„å­—ç¬¦ä¸²çš„æ–‡ä»¶ä¸­
+// æˆåŠŸè¿”å›1ï¼Œ å¦åˆ™è¿”å›0
 {
     FILE *fp;
     struct Item_Node *p;
 
-    // ´ò¿ªÎÄ¼ş
+    // æ‰“å¼€æ–‡ä»¶
     fp = fopen(file_name, "w");
 
-    // ¼ì²éÎÄ¼şÊÇ·ñ´ò¿ª³É¹¦
+    // æ£€æŸ¥æ–‡ä»¶æ˜¯å¦æ‰“å¼€æˆåŠŸ
     if (fp == NULL)
         return 0;
 
-    // Êä³öÎÄ¼şÍ·
+    // è¾“å‡ºæ–‡ä»¶å¤´
     fprintf(fp, "ItemDatabase\n");
 
-    // Êä³öÎÄ¼ş°æ±¾
+    // è¾“å‡ºæ–‡ä»¶ç‰ˆæœ¬
     fprintf(fp, "version=10\n");
 
 
-    // Ñ­»·ËùÓĞÎïÆ·
+    // å¾ªç¯æ‰€æœ‰ç‰©å“
     for (p = item_database_head; p != NULL; p = p->next)
     {
         fputc('\n', fp);
 
-        // Êä³öÎïÆ·¿ªÊ¼±êÇ©
+        // è¾“å‡ºç‰©å“å¼€å§‹æ ‡ç­¾
         fprintf(fp, "<Item>\n");
 
-        // Êä³öÎïÆ·ÊôĞÔ
+        // è¾“å‡ºç‰©å“å±æ€§
         fprintf(fp, "number=%d\n", p->data.number);
 
         fprintf(fp, "name=%s\n", p->data.name);
 
         fprintf(fp, "quantity=%d\n", p->data.quantity);
 
-        // Êä³öÎïÆ·½áÊø±êÇ©
+        // è¾“å‡ºç‰©å“ç»“æŸæ ‡ç­¾
         fprintf(fp, "</Item>\n");
     }
 
 
-    // ¹Ø±ÕÎÄ¼ş
+    // å…³é—­æ–‡ä»¶
     fclose(fp);
 
     return 1;
 }
 
 int ItemDB_LoadFromFile(const char *file_name)
-// ´ÓÎÄ¼şÃûÎªfile_nameÖ¸ÏòµÄ×Ö·û´®µÄÎÄ¼şÖĞÔØÈëÊı¾İ¿âÊı¾İ
-// ³É¹¦·µ»Ø1£¬ ·ñÔò·µ»Ø0
+// ä»æ–‡ä»¶åä¸ºfile_nameæŒ‡å‘çš„å­—ç¬¦ä¸²çš„æ–‡ä»¶ä¸­è½½å…¥æ•°æ®åº“æ•°æ®
+// æˆåŠŸè¿”å›1ï¼Œ å¦åˆ™è¿”å›0
 {
     FILE *fp;
 
@@ -64,14 +64,14 @@ int ItemDB_LoadFromFile(const char *file_name)
     int itemp;
     struct Item temp_item;
 
-    // ´ò¿ªÎÄ¼ş
+    // æ‰“å¼€æ–‡ä»¶
     fp = fopen(file_name, "r");
 
-    // ¼ì²éÎÄ¼şÊÇ·ñ´ò¿ª³É¹¦
+    // æ£€æŸ¥æ–‡ä»¶æ˜¯å¦æ‰“å¼€æˆåŠŸ
     if (fp == NULL)
         return 0;
 
-    // ¶ÁÈëµÚÒ»ĞĞ
+    // è¯»å…¥ç¬¬ä¸€è¡Œ
     if (fgets(buffer, sizeof(buffer), fp) == NULL)
     {
         fclose(fp);
@@ -81,71 +81,71 @@ int ItemDB_LoadFromFile(const char *file_name)
     if (pc != NULL)
         *pc = '\0';
 
-    // ÅĞ¶ÏÊÇ·ñÓëÎÄ¼şÍ·Æ¥Åä
+    // åˆ¤æ–­æ˜¯å¦ä¸æ–‡ä»¶å¤´åŒ¹é…
     if (strcmp(buffer, "ItemDatabase") != 0)
     {
         fclose(fp);
         return 0;
     }
-    // ¶ÁÈëµÚ¶şĞĞ
+    // è¯»å…¥ç¬¬äºŒè¡Œ
     if (fgets(buffer, sizeof(buffer), fp) == NULL)
     {
         fclose(fp);
         return 0;
     }
 
-    // ¼ì²é°æ±¾¸ñÊ½ÊÇ·ñÕıÈ·
-    // ÒÔ¼°°æ±¾ºÅÊÇ·ñÊÇ10
+    // æ£€æŸ¥ç‰ˆæœ¬æ ¼å¼æ˜¯å¦æ­£ç¡®
+    // ä»¥åŠç‰ˆæœ¬å·æ˜¯å¦æ˜¯10
     if (1 != sscanf(buffer, "version=%d", &version_number) || version_number != 10)
     {
         fclose(fp);
         return 0;
     }
 
-    // Çå¿ÕÊı¾İ¿âÄÚÈİ
+    // æ¸…ç©ºæ•°æ®åº“å†…å®¹
     ItemDB_ClearDatabase();
 
     while (!feof(fp))
     {
-        // ¶ÁÈëÒ»ĞĞ
+        // è¯»å…¥ä¸€è¡Œ
         fgets(buffer, sizeof(buffer), fp);
         pc = strrchr(buffer, '\n');
         if (pc != NULL)
             *pc = '\0';
-        // ¼ì²éµ±Ç°ÊÇ·ñÔÚÎïÆ·ÖĞ
+        // æ£€æŸ¥å½“å‰æ˜¯å¦åœ¨ç‰©å“ä¸­
         if (!in_item)
         {
-            // ²»ÔÚÎïÆ·ÖĞ
-            // ¼ì²éÊÇ·ñÊÇÎïÆ·¿ªÊ¼±êÇ©
+            // ä¸åœ¨ç‰©å“ä¸­
+            // æ£€æŸ¥æ˜¯å¦æ˜¯ç‰©å“å¼€å§‹æ ‡ç­¾
             if (strcmp(buffer, "<Item>") == 0)
             {
-                // ÉıÆğÔÚÎïÆ·ÖĞÆìÖÄ
+                // å‡èµ·åœ¨ç‰©å“ä¸­æ——å¸œ
                 in_item = 1;
             }
         }
         else
         {
-            // ÔÚÎïÆ·ÖĞ
-            // ¼ì²éÊÇ·ñÊÇÎïÆ·½áÊø±êÇ©
+            // åœ¨ç‰©å“ä¸­
+            // æ£€æŸ¥æ˜¯å¦æ˜¯ç‰©å“ç»“æŸæ ‡ç­¾
             if (strcmp(buffer, "</Item>") == 0)
             {
-                // ½µÏÂÔÚÎïÆ·ÖĞµÄÆìÖÄ
+                // é™ä¸‹åœ¨ç‰©å“ä¸­çš„æ——å¸œ
                 in_item = 0;
 
-                // °ÑÎïÆ·¼ÓÈëÊı¾İ¿â
+                // æŠŠç‰©å“åŠ å…¥æ•°æ®åº“
                 ItemDB_AddItem(&temp_item);
             }
-            // ¼ì²éÊÇ·ñÊÇÎïÆ·±àºÅ
+            // æ£€æŸ¥æ˜¯å¦æ˜¯ç‰©å“ç¼–å·
             else if (1 == sscanf(buffer, "number=%d", &itemp))
             {
                 temp_item.number = itemp;
             }
-            // ¼ì²éÊÇ·ñÊÇÎïÆ·ÊıÁ¿
+            // æ£€æŸ¥æ˜¯å¦æ˜¯ç‰©å“æ•°é‡
             else if (1 == sscanf(buffer, "quantity=%d", &itemp))
             {
                 temp_item.quantity = itemp;
             }
-            // ¼ì²éÊÇ·ñÊÇÎïÆ·Ãû³Æ
+            // æ£€æŸ¥æ˜¯å¦æ˜¯ç‰©å“åç§°
             else if (0 == strncmp(buffer, "name=", 5))
             {
                 strncpy(temp_item.name, buffer + 5, ITEM_NAME_MAX_LEN - 1);
@@ -154,7 +154,7 @@ int ItemDB_LoadFromFile(const char *file_name)
         }
     }
 
-    // ¹Ø±ÕÎÄ¼ş
+    // å…³é—­æ–‡ä»¶
     fclose(fp);
     return 1;
 }
