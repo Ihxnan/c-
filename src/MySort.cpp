@@ -5,11 +5,11 @@ static unsigned char *FindSplitElement(
     unsigned char *low, unsigned char *high,
     size_t element_size,
     int (*compare_func)(const void *, const void *))
-// ´ÓÊı×éÖĞÑ¡Ôñ·Ö¸îÔªËØ²¢·µ»ØÖ¸Ïò¸ÃÔªËØµÄÖ¸Õë¡£
-// lowÖ¸ÏòÊı×éµÄµÚÒ»¸öÔªËØ£¬highÖ¸ÏòÊı×éµÄ×îºóÒ»¸öÔªËØ¡£
-// Êı×éÃ¿¸öÔªËØµÄ³ß´çÎªelement_size¸ö×Ö½Ú¡£
-// ÔªËØµÄ´óĞ¡¹ØÏµÓÉcompare_funcÖ¸ÏòµÄ±È½Ïº¯ÊıÅĞ¶Ï¡£
-// ¸Ãº¯ÊıµÄ·µ»ØÖµº¬Òå£ºÕıÊı´ú±í´óÓÚ£¬Áã´ú±íµÈÓÚ£¬¸ºÊı´ú±íĞ¡ÓÚ
+// ä»æ•°ç»„ä¸­é€‰æ‹©åˆ†å‰²å…ƒç´ å¹¶è¿”å›æŒ‡å‘è¯¥å…ƒç´ çš„æŒ‡é’ˆã€‚
+// lowæŒ‡å‘æ•°ç»„çš„ç¬¬ä¸€ä¸ªå…ƒç´ ï¼ŒhighæŒ‡å‘æ•°ç»„çš„æœ€åä¸€ä¸ªå…ƒç´ ã€‚
+// æ•°ç»„æ¯ä¸ªå…ƒç´ çš„å°ºå¯¸ä¸ºelement_sizeä¸ªå­—èŠ‚ã€‚
+// å…ƒç´ çš„å¤§å°å…³ç³»ç”±compare_funcæŒ‡å‘çš„æ¯”è¾ƒå‡½æ•°åˆ¤æ–­ã€‚
+// è¯¥å‡½æ•°çš„è¿”å›å€¼å«ä¹‰ï¼šæ­£æ•°ä»£è¡¨å¤§äºï¼Œé›¶ä»£è¡¨ç­‰äºï¼Œè´Ÿæ•°ä»£è¡¨å°äº
 {
     unsigned char* temp = (unsigned char*)malloc(element_size);
     memcpy(temp, low, element_size);
@@ -45,11 +45,11 @@ static unsigned char *FindSplitElement(
 void QuickSort(void *base,
                size_t num_elements, size_t element_size,
                int (*compare_func)(const void *, const void *))
-// ¶ÔbaseÖ¸ÏòµÄÊı×é°´ÕÕ´ÓĞ¡µ½´óµÄË³Ğò½øĞĞÅÅĞò¡£
-// Êı×éÓĞnum_elements¸öÔªËØ£¬
-// Ã¿¸öÔªËØµÄ³ß´çÎªelement_size¸ö×Ö½Ú¡£
-// ÔªËØµÄ´óĞ¡¹ØÏµÓÉcompare_funcÖ¸ÏòµÄ±È½Ïº¯ÊıÅĞ¶Ï¡£
-// ¸Ãº¯ÊıµÄ·µ»ØÖµº¬Òå£ºÕıÊı´ú±í´óÓÚ£¬Áã´ú±íµÈÓÚ£¬¸ºÊı´ú±íĞ¡ÓÚ¡£
+// å¯¹baseæŒ‡å‘çš„æ•°ç»„æŒ‰ç…§ä»å°åˆ°å¤§çš„é¡ºåºè¿›è¡Œæ’åºã€‚
+// æ•°ç»„æœ‰num_elementsä¸ªå…ƒç´ ï¼Œ
+// æ¯ä¸ªå…ƒç´ çš„å°ºå¯¸ä¸ºelement_sizeä¸ªå­—èŠ‚ã€‚
+// å…ƒç´ çš„å¤§å°å…³ç³»ç”±compare_funcæŒ‡å‘çš„æ¯”è¾ƒå‡½æ•°åˆ¤æ–­ã€‚
+// è¯¥å‡½æ•°çš„è¿”å›å€¼å«ä¹‰ï¼šæ­£æ•°ä»£è¡¨å¤§äºï¼Œé›¶ä»£è¡¨ç­‰äºï¼Œè´Ÿæ•°ä»£è¡¨å°äºã€‚
 {
     size_t num_elements_before;
     unsigned char *middle;
