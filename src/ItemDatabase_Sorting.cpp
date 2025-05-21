@@ -7,12 +7,12 @@
 static int g_sort_method, g_sort_dir;
 
 static int CompareItems(const void *p, const void *q)
-// ±È½Ïº¯Êı
-// ¸ù¾İsort_method ºÍ sort_dir ±È½Ï *p ºÍ *q µÄ´óĞ¡
-// ÕıÊı´ú±í´óÓÚ£¬Áã´ú±íµÈÓÚ£¬¸ºÊı´ú±íĞ¡ÓÚ
-// ²ÎÊıËµÃ÷£º
-// sort_method: SORT_BY_NUMBER -> ¸ù¾İ±àºÅ±È½Ï, SORT_BY_NAME -> ¸ù¾İÃû³Æ±È½Ï, SORT_BY_QUANTITY -> ¸ù¾İÊıÁ¿±È½Ï
-// sort_dir: SORT_ASCENDING -> ÉıĞò, SORT_DESCENDING -> ½µĞò
+// æ¯”è¾ƒå‡½æ•°
+// æ ¹æ®sort_method å’Œ sort_dir æ¯”è¾ƒ *p å’Œ *q çš„å¤§å°
+// æ­£æ•°ä»£è¡¨å¤§äºï¼Œé›¶ä»£è¡¨ç­‰äºï¼Œè´Ÿæ•°ä»£è¡¨å°äº
+// å‚æ•°è¯´æ˜ï¼š
+// sort_method: SORT_BY_NUMBER -> æ ¹æ®ç¼–å·æ¯”è¾ƒ, SORT_BY_NAME -> æ ¹æ®åç§°æ¯”è¾ƒ, SORT_BY_QUANTITY -> æ ¹æ®æ•°é‡æ¯”è¾ƒ
+// sort_dir: SORT_ASCENDING -> å‡åº, SORT_DESCENDING -> é™åº
 {
 
     const struct Item *p_item = (const struct Item *)p;
